@@ -1,18 +1,57 @@
-<div style="font-family:Arial,sans-serif; max-width:560px; border:1px solid #e6e6e6; border-radius:16px; padding:18px;">
-  <div style="font-size:22px; font-weight:700; margin-bottom:6px;">Will you be my Valentine? 💘</div>
-  <div style="color:#444; margin-bottom:14px;">Pick one:</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine?</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 24px; color:#111; }
+    .card { max-width: 560px; border:1px solid #e6e6e6; border-radius:16px; padding:18px; }
+    h1 { font-size: 22px; margin: 0 0 8px 0; }
+    p { margin: 8px 0; color:#444; }
+    .btn { display:inline-block; padding:12px 16px; border-radius:12px; font-weight:700; text-decoration:none; border:1px solid #111; margin: 8px 10px 0 0; cursor:pointer; }
+    .primary { background:#111; color:#fff; }
+    .secondary { background:#fff; color:#111; }
+    .invite { margin-top:16px; padding-top:14px; border-top:1px dashed #d0d0d0; display:none; }
+    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#f2f2f2; font-size:13px; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Will you be my Valentine? 💘</h1>
+    <p>Choose one:</p>
 
-  <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Valentine%27s%20Brunch%20%F0%9F%92%95&dates=20260214T080000Z/20260214T093000Z&details=Brunch%20on%2014.02%20at%2010%3A00%20(Latvia%20time).%0AYou%20said%3A%20YES%20%E2%9C%85&location="
-     style="display:inline-block; padding:12px 16px; border-radius:12px; background:#111; color:#fff; text-decoration:none; font-weight:700; margin-right:10px;">
-    Yes ✅
-  </a>
+    <a class="btn primary" id="yesBtn">Yes ✅</a>
+    <a class="btn secondary" id="defBtn">Definitely yes 💘</a>
 
-  <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Valentine%27s%20Brunch%20%F0%9F%92%95&dates=20260214T080000Z/20260214T093000Z&details=Brunch%20on%2014.02%20at%2010%3A00%20(Latvia%20time).%0AYou%20said%3A%20DEFINITELY%20YES%20%F0%9F%92%98&location="
-     style="display:inline-block; padding:12px 16px; border-radius:12px; background:#fff; color:#111; text-decoration:none; font-weight:700; border:1px solid #111;">
-    Definitely yes 💘
-  </a>
+    <div class="invite" id="invite">
+      <div class="pill" id="answerPill">Answer: —</div>
+      <h2 style="font-size:18px; margin:10px 0 6px 0;">Brunch invite</h2>
+      <p><b>Date:</b> 14.02.2026</p>
+      <p><b>Time:</b> 10:00 (Latvia time)</p>
 
-  <div style="margin-top:16px; color:#444; font-size:14px;">
-    Brunch: <b>14.02.2026</b> at <b>10:00</b> (Latvia time) — after clicking, press <b>Save</b>.
+      <a class="btn primary" id="calBtn" target="_blank" rel="noopener">Add to Google Calendar</a>
+      <p style="font-size:13px;">After it opens, press <b>Save</b>.</p>
+    </div>
   </div>
-</div>
+
+  <script>
+    const yesLink = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Valentine%27s%20Brunch%20%F0%9F%92%95&dates=20260214T080000Z/20260214T093000Z&details=Brunch%20on%2014.02%20at%2010%3A00%20(Latvia%20time).%0AYou%20said%3A%20YES%20%E2%9C%85&location=";
+    const defLink = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Valentine%27s%20Brunch%20%F0%9F%92%95&dates=20260214T080000Z/20260214T093000Z&details=Brunch%20on%2014.02%20at%2010%3A00%20(Latvia%20time).%0AYou%20said%3A%20DEFINITELY%20YES%20%F0%9F%92%98&location=";
+
+    const invite = document.getElementById("invite");
+    const answerPill = document.getElementById("answerPill");
+    const calBtn = document.getElementById("calBtn");
+
+    function showInvite(answer, link) {
+      answerPill.textContent = "Answer: " + answer;
+      calBtn.href = link;
+      invite.style.display = "block";
+      invite.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    document.getElementById("yesBtn").addEventListener("click", () => showInvite("Yes ✅", yesLink));
+    document.getElementById("defBtn").addEventListener("click", () => showInvite("Definitely yes 💘", defLink));
+  </script>
+</body>
+</html>
